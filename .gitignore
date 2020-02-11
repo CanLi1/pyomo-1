@@ -8,6 +8,8 @@
 *.pyc
 *.pyo
 *.egg-info
+._*
+.DS_Store
 
 # Documentation builds
 doc/OnlineDocs/_build
