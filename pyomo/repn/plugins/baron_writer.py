@@ -820,7 +820,7 @@ class ProblemWriter_bar(AbstractProblemWriter):
 
         output_file.close()
 
-        if output_filename == "root_relaxation_baron":
+        if output_filename == "root_relaxation_baron.bar":
             return output_filename, symbol_map, referenced_variable_ids
         else:
             return output_filename, symbol_map

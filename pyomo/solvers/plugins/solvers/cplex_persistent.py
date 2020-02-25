@@ -123,3 +123,22 @@ class CPLEXPersistent(PersistentSolver, CPLEXDirect):
             The file type (e.g., lp).
         """
         self._solver_model.write(filename, filetype=filetype)
+
+    #Benders related
+    def set_benders_annotation(self):
+        self.anno = self._solver_model.long_annotations
+        self.idx = self.anno.add(name=self.anno.benders_annotation,
+                   defval=self.anno.benders_mastervalue)
+
+    def set_benders_strategy(self, strategy):
+        self._solver_model.parameters.benders.strategy.set(strategy)
+
+    def set_master_variable(self, var):
+        cplex_var = self._pyomo_var_to_ndx_map[var]
+        self._solver_model.long_annotations.set_values(self.idx, self.anno.object_type.variable, cplex_var, 0)
+
+    def set_subproblem_variable(self, var, index):
+        cplex_var = self._pyomo_var_to_ndx_map[var]
+        self._solver_model.long_annotations.set_values(self.idx, self.anno.object_type.variable, cplex_var, index)
+
+
