@@ -137,6 +137,9 @@ class CPLEXPersistent(PersistentSolver, CPLEXDirect):
         cplex_var = self._pyomo_var_to_ndx_map[var]
         self._solver_model.long_annotations.set_values(self.idx, self.anno.object_type.variable, cplex_var, 0)
 
+    def set_mip_rel_gap(self, tol):
+        self._solver_model.parameters.mip.tolerances.mipgap.set(tol)        
+
     def set_subproblem_variable(self, var, index):
         cplex_var = self._pyomo_var_to_ndx_map[var]
         self._solver_model.long_annotations.set_values(self.idx, self.anno.object_type.variable, cplex_var, index)
